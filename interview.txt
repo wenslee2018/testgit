@@ -181,3 +181,4 @@ spring框架中用到了哪些设计模式
 6、工厂模式：BeanFactory用来创建对象的实例
 poi打印：
 HSSFWorkbook workBook = new HSSFWorkbook(); excel最大行数65536 
+多线程高并发？
