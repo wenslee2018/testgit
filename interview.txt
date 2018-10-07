@@ -1,0 +1,183 @@
+①面向对象（OOP）的基本特征：
+1、抽象 
+数据抽象 -->表示世界中一类事物的特征,就是对象的属性.比如鸟有翅膀,羽毛等(类的属性)
+过程抽象 -->表示世界中一类事物的行为,就是对象的行为.比如鸟会飞,会叫(类的方法)
+；2、继承；
+一种联结类的层次模型,并且允许和鼓励类的重用,提供一种明确表达共性的方法.对象的一个新类可以从现有的类中派生,这个过程称为类继承.
+新类继承了原始类的特性,新类称为原始类的派生类(子类),原始类称为新类的基类(父类).派生类可以从它的父类哪里继承方法和实例变量,并且类可以修改或增加新的方法使之更适合特殊的需要.因此可以说,继承为了重用父类代码,同时为实现多态性作准备.
+3、封装
+封装就是把过程和数据包围起来,对数据的访问只能通过特定的界面.如私有变量,用set,get方法获取
+；4、多态
+广义：事物的多种形态
+狭义：子类对象的多态性。举例，广东人和北京人都是中国人
+②final、finally、finalize的区别：
+final修饰符（关键字）。被final修饰的类，就意味着不能再派生出新的子类，不能作为父类而被子类继承。因此一个类不能既被abstract声明，又被final声明。
+finally是在异常处理时提供finally块来执行任何清除操作。不管有没有异常被抛出、捕获，finally块都会被执行
+finalize是方法名，jvm垃圾收集器调用
+③int 和 Integer 有什么区别：
+int 基本数据类型    0
+integer int的包装类 null 常量池
+ int i = 128;
+        Integer i2 = 128;
+        Integer i3 = new Integer(128);
+        System.out.println(i == i2); //Integer会自动拆箱为int，所以为true
+        System.out.println(i == i3); //true，理由同上
+        Integer i4 = 127;//编译时被翻译成：Integer i4 = Integer.valueOf(127);
+        Integer i5 = 127;
+        System.out.println(i4 == i5);//true
+        Integer i6 = 128;
+        Integer i7 = 128;
+        System.out.println(i6 == i7);//false
+        Integer i8 = new Integer(127);
+        System.out.println(i5 == i8); //false
+        Integer i9 = new Integer(128);
+        Integer i10 = new Integer(123);
+        System.out.println(i9 == i10);  //false
+④Java抽象类与接口的区别：
+如果你拥有一些方法并且想让它们中的一些有默认实现，那么使用抽象类吧。
+如果你想实现多重继承，那么你必须使用接口。（java8 也有默认方法，静态方法。静态方法：和调用类的静态方法的方式类似）
+5：说说反射的用途及实现
+在运行时判断任意一个对象所属的类
+在运行时构造任意一个类的对象
+在运行时判断任意一个类所具有的成员变量和方法（通过反射设置可以调用 private）
+在运行时调用人一个对象的方法
+6：HTTP 请求的 GET 与 POST 方式的区别
+GET和POST还有一个重大区别，简单的说：
+GET产生一个TCP数据包；POST产生两个TCP数据包。
+长的说：
+对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200（返回数据）；GET传递数据的长度是2048个字节
+而对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok（返回数据）。
+7.session 与 cookie区别
+如果用户是在自己家的电脑上上网，登录时就可以记住他的登录信息，下次访问时不需要再次登录，直接访问即可。实现方法是把登录信息如账号、密码等保存在Cookie中，
+并控制Cookie的有效期，下次访问时再验证Cookie中的登录信息即可。
+Session是另一种记录客户状态的机制，不同的是Cookie保存在客户端浏览器中，而Session保存在服务器上。客户端浏览器访问服务器的时候，服务器把客户端信息以某种形式记录在服务器上。
+这就是Session。
+客户端浏览器再次访问时只需要从该Session中查找该客户的状态就可以了。Session对应的类为javax.servlet.http.HttpSession类
+如果说Cookie机制是通过检查客户身上的“通行证”来确定客户身份的话，那么Session机制就是通过检查服务器上的“客户明细表”来确认客户身份。
+Session相当于程序在服务器上建立的一份客户档案，客户来访的时候只需要查询客户档案表就可以了。
+存储session方法 
+方法一：可以直接在方法的参数中引入,其中session也可以通过request获得
+方法二：通过@SessionAttributes注解进行设置
+获取session方法
+方法一：可以直接在方法的参数中引入,其中session也可以通过request获得
+方法二：使用 @Autowired 注入HttpSession，或HttpServletRequest来获取session
+分布式下的session处理方式：
+将用户的session存放在redis上，用户在访问的时候，读取修改都在redis上 
+目前这种做法是大家使用最多的方法
+
+
+8.==比较内存地址
+equal比较对象内容
+9.list \set\map区别
+list/set 都继承collection
+set有序结合
+map 无序
+List arrayList = new ArrayList();初始化容量为10 底层是数组实现，超过就扩容，在已经知道容量大小的情况下，声明初始容量
+map无序结合
+5.线程安全集合类与非线程安全集合类 
+LinkedList、ArrayList、HashSet是非线程安全的，Vector是线程安全的;
+HashMap是非线程安全的，HashTable是线程安全的;
+StringBuilder是非线程安全的，StringBuffer是线程安全的。 初始化容量16，不够 翻倍
+10.创建线程的方式及实现：
+1：定义Thread类的子类，并重写该类的run()方法。对象.start();启动
+2：实现Runnable接口创建线程 new Thread（"入参"）.start();
+3：实现Callable接口 call有返回值。
+11.线程池的几种方式：
+ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
+//创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程。
+ ExecutorService fixedThreadPool = Executors.newFixedThreadPool(3);
+//创建一个指定工作线程数量的线程池。每当提交一个任务就创建一个工作线程，如果工作线程数量达到线程池初始的最大数，则将提交的任务存入到池队列中。
+ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+//创建一个单线程化的Executor，即只创建唯一的工作者线程来执行任务，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行。
+如果这个线程异常结束，会有另一个取代它，保证顺序执行。单工作线程最大的特点是可保证顺序地执行各个任务，并且在任意给定的时间不会有多个线程是活动的。
+ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(5);
+//创建一个定长的线程池，而且支持定时的以及周期性的任务执行，支持定时及周期性任务执行。
+12.讲讲线程池的实现原理
+ThreadPoolExecutor（corePoolSize,maxPoolSize,keepAliveTime,timeUnit,workQueue,threadFactory,handle);   
+     corePoolSize：核心线程数
+　  maxPoolSize：最大线程数
+     keepAliveTime：线程存活时间（在corePore<*<maxPoolSize情况下有用）
+     timeUnit：存活时间的时间单位
+     workQueue：阻塞队列（用来保存等待被执行的任务）
+     threadFactory：线程工厂，主要用来创建线程；
+     handler：表示当拒绝处理任务时的策略，有以下四种取值
+线程池中的核心线程数，当提交一个任务时，线程池创建一个新线程执行任务，直到当前线程数等于corePoolSize；
+如果当前线程数为corePoolSize，继续提交的任务被保存到阻塞队列中，等待被执行；如果阻塞队列满了，那就创建新的线程执行当前任务；
+直到线程池中的线程数达到maxPoolSize,这时再有任务来，只能执行reject()处理该任务；
+
+
+redis：
+redis几种数据类型以及使用场景
+1. string类型 验证码，接收到用户请求后校验redis是否存在，不存在就过期了
+2. list类型 pop push
+3. set类型 set
+4. sorted set类型 有序set
+5. hash类型  常用配置项数据
+redis实现分布式锁：hash存储，使用主机名getHostname，时间new 个map， task名作hkey， hash存储
+定时job：定时自动执行，获取到锁执行业务逻辑代码，执行玩释放锁，获取不到什么都不做。
+初始化项目配置数据：
+spring xml配置个简单业务类bean，业务类implements ApplicationListener<ContextRefreshedEvent>，
+onApplicationEvent方法（容器初始化时执行），重写方法里面写要实现的业务逻辑方法。
+业务逻辑方法，实例化redis bean对象，event.getApplicationContext().getBean，执行redis 存储。
+平均分派任务的小算法：先递归剔除不满足条件的数据，最后做统一处理。
+Redis提供的持久化机制
+Redis提供了RDB（默认）持久化和AOF持久化
+RDB文件保存过程：有点类似git操作，写入时共享物理页面，父副本，子快照
+AOF文件保存过程：
+redis会将每一个收到的写命令都通过write函数追加到文件中(默认是 appendonly.aof)。
+当redis重启时会通过重新执行文件中保存的写命令来在内存中重建整个数据库的内容，可能回部分丢失，fsync函数默认1秒次
+AOF 文件的体积通常要大于 RDB 文件的体积
+能忍受几分钟的数据丢失rdb，其他情况，aof
+zookeeper管理redis集群：redis官网支持Redis-Cluster采用无中心结构，1、redis cluster节点分配2、Redis Cluster主从模式
+解压redis安装包，编译安装，  配置redis的配置文件redis.conf
+复制多份（奇数个双倍），修改对应的端口号，执行ruby脚本， 复制redis解压文件src下的redis-trib.rb文件到redis-cluster目录 3，启动
+消息队列使用场景：jms activeMq
+串行方式：将注册信息写入数据库成功后，发送注册邮件，再发送注册短信。以上三个任务全部完成后，返回给客户端
+并行方式：将注册信息写入数据库成功后，发送注册邮件的同时，发送注册短信。以上三个任务完成后，返回给客户端
+场景说明：用户下单后，订单系统需要通知库存系统。传统的做法是，订单系统调用库存系统的接口
+应用将主干逻辑处理完成后，写入消息队列。消息发送是否成功可以开启消息的确认模式
+在JMS标准中，有两种消息模型P2P（Point to Point）,Publish/Subscribe(Pub/Sub)。
+P2P模式包含三个角色：消息队列（Queue），发送者(Sender)，接收者(Receiver)。每个消息都被发送到一个特定的队列，接收者从队列中获取消息。队列保留着消息，直到他们被消费或超时。
+P2P的特点
+每个消息只有一个消费者（Consumer）(即一旦被消费，消息就不再在消息队列中)
+发送者和接收者之间在时间上没有依赖性，也就是说当发送者发送了消息之后，不管接收者有没有正在运行，它不会影响到消息被发送到队列
+接收者在成功接收消息之后需向队列应答成功
+包含三个角色主题（Topic），发布者（Publisher），订阅者（Subscriber） 多个发布者将消息发送到Topic,系统将这些消息传递给多个订阅者。
+
+Pub/Sub的特点
+每个消息可以有多个消费者
+发布者和订阅者之间有时间上的依赖性。针对某个主题（Topic）的订阅者，它必须创建一个订阅者之后，才能消费发布者的消息
+为了消费消息，订阅者必须保持运行的状态 
+消费
+（1）同步
+订阅者或接收者通过receive方法来接收消息，receive方法在接收到消息之前（或超时之前）将一直阻塞；
+（2）异步
+订阅者或接收者可以注册为一个消息监听器。当消息到达之后，系统自动调用监听器的onMessage方法。
+实现BeanFactory接口的简单容器，具备最基本功能。
+实现ApplicationContext接口的复杂容器，具备高级功能。
+ 分库分表：
+sharding-jdbc和mycat使用不同的理念，
+sharding-jdbc目前是基于jdbc驱动，无需额外的proxy，因此也无需关注proxy本身的高可用。
+Mycat 是基于 Proxy，它复写了 MySQL 协议，将 Mycat Server 伪装成一个 MySQL 数据库，
+而 Sharding-JDBC 是基于 JDBC 接口的扩展，是以 jar 包的形式提供轻量级服务的
+
+说说分库与分表设计：
+分表策略：
+横向切，数据太多的话分成总数%2n次方 张表
+竖向切，单个表字段太多，将关键业务字段和业务不常用字段拆分开来成多个表。
+mysql主从复制 master slave
+ySQL-Proxy调度服务器  有mycat
+spring框架中用到了哪些设计模式
+1、代理模式：在AOP和remoting中被用的比较多
+
+2、单例模式：在spring配置文件中定义的bean默认为单例模式
+
+3、模板方法模式：解决代码重复问题
+
+4、前端控制器模式：spring提供了DispatcherServlet来对请求进行分发
+
+5、依赖注入模式：贯穿于BeanFactory和ApplicationContext接口的核心理念
+
+6、工厂模式：BeanFactory用来创建对象的实例
+poi打印：
+HSSFWorkbook workBook = new HSSFWorkbook(); excel最大行数65536 
